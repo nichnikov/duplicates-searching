@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  dpl_s:
+    image: dupl-searching
+    ports:
+      - "6004:6004"
+  dpl_s_inf:
+    image: dupl-searching-interfaces
+    ports:
+      - "6001:6001"
