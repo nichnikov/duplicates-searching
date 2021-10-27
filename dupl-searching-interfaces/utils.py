@@ -2,6 +2,7 @@ import io
 import requests
 import pandas as pd
 from flask import Response
+from flask_restplus import inputs
 from werkzeug.datastructures import Headers, FileStorage
 
 
@@ -9,10 +10,14 @@ from werkzeug.datastructures import Headers, FileStorage
 def api_configurator(name_space):
     """"""
     upload_parser = name_space.parser()
-    upload_parser.add_argument("searched_texts", type=FileStorage, location='files', required=True)
-    upload_parser.add_argument("texts_search_in", type=FileStorage, location='files', required=True)
-    upload_parser.add_argument("only_different_groups", type=bool, required=True)
-    upload_parser.add_argument("score", type=float, required=True)
+    upload_parser.add_argument("searched_texts", type=FileStorage, location='files', required=True,
+                               help="искомые тексты, обязательные поля: id, texts")
+    upload_parser.add_argument("texts_search_in", type=FileStorage, location='files', required=True,
+                               help="тексты в которых искать, обязательные поля: id, texts")
+    upload_parser.add_argument("only_different_groups", type=inputs.boolean, default=True, required=True,
+                               help="True: возвращает похожие с разными id, False: возвращает похожие с любыми id")
+    upload_parser.add_argument("score", type=float, required=True,
+                               help="степень похожести")
     return upload_parser
 
 
