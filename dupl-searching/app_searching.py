@@ -42,10 +42,10 @@ class Searching(Resource):
         assert len(texts) == len(ids), "len of texts not equals len of ids"
         assert len(searched_texts) == len(searched_ids), "len of searched texts not equals len of searched ids"
 
-        if len(texts) * len(searched_texts) < 50000 * 50000 and only_different_groups == False:
-            search_results = duplicates_search_func(searched_ids, searched_texts, ids, texts, min_score)
-        else:
+        if only_different_groups:
             search_results = full_indexes_search(searched_ids, searched_texts, ids, texts, min_score)
+        else:
+            search_results = duplicates_search_func(searched_ids, searched_texts, ids, texts, min_score)
 
         return jsonify({"duplicates": search_results})
 
