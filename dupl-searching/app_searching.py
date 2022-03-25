@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_restplus import Api, Resource, fields
 from utils import duplicates_search_func
+from waitress import serve
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -50,4 +51,5 @@ class Searching(Resource):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=6004)
+    serve(app, host="0.0.0.0", port=6004)
+    # app.run(host='0.0.0.0', port=6004)

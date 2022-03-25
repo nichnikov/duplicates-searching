@@ -1,4 +1,5 @@
 import os
+from waitress import serve
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask import Flask, request
@@ -96,4 +97,6 @@ class ClusteringEcxelExcel(Resource):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=6001)
+    serve(app, host="0.0.0.0", port=6001)
+    # app.run(host='0.0.0.0', port=6001)
+

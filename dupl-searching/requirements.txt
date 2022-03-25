@@ -4,4 +4,5 @@ flask_restplus
 pymystem3
 gensim
 sklearn
+waitress
 Werkzeug==0.16.1
