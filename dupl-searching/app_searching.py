@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_restplus import Api, Resource, fields
-from utils import duplicates_search_func, full_indexes_search
+from utils import duplicates_search_func
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -42,11 +42,10 @@ class Searching(Resource):
         assert len(texts) == len(ids), "len of texts not equals len of ids"
         assert len(searched_texts) == len(searched_ids), "len of searched texts not equals len of searched ids"
 
+        # ("searched_text, searched_id, similar_text, similar_text_id, score")
+        search_results = duplicates_search_func(searched_ids, searched_texts, ids, texts, min_score)
         if only_different_groups:
-            search_results = full_indexes_search(searched_ids, searched_texts, ids, texts, min_score)
-        else:
-            search_results = duplicates_search_func(searched_ids, searched_texts, ids, texts, min_score)
-
+            search_results = [x for x in search_results if x[1] != x[3]]
         return jsonify({"duplicates": search_results})
 
 
