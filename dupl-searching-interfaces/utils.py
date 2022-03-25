@@ -42,6 +42,7 @@ def remote_duplicates_search(args, clustering_url, upload_type="excel"):
                      "score": args['score']}
 
     duplicates_search_response = requests.post(clustering_url, json=json_data)
+    print("duplicates_search_response:", duplicates_search_response)
     duplicates_tuples_dict = duplicates_search_response.json()
     return pd.DataFrame(duplicates_tuples_dict["duplicates"], columns=["searched_text", "searched_id",
                                                                        "similar_text", "similar_text_id", "score"])

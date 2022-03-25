@@ -18,4 +18,4 @@ EXPOSE 6001
 
 
 # run the command
-CMD ["python", "./app_json_excel.py"]
+CMD ["python", "./app_duplisearcher.py"]
